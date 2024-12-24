@@ -9,8 +9,8 @@ const Deposit = () => {
 
     const [adminMessage, setAdminMessage] = useState('')
     const [adminMessageFor, setAdminMessageFor] = useState('')
-    const [promoCode, setpromoCode] = useState(null)
-    const [promoBalance, setPromoBalance] = useState(null)
+    // const [promoCode, setpromoCode] = useState(null)
+    // const [promoBalance, setPromoBalance] = useState(null)
     const [loader, setLoader] = useState(false)
     const [data, setData] = useState([])
 

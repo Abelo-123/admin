@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import '@telegram-apps/telegram-ui/dist/styles.css';
-import { AppRoot, Text } from '@telegram-apps/telegram-ui';// Adjust as necessary
+import { AppRoot } from '@telegram-apps/telegram-ui';// Adjust as necessary
 import Deposit from "./components/Deposit/page";
 
 import { useActivePage } from './components/ActivePageContext';

@@ -1,6 +1,5 @@
 "use client"
 import { useEffect, useState } from "react";
-import localFont from "next/font/local";
 import "./globals.css";
 import { ActivePageProvider } from "./components/ActivePageContext"
 import { UserProvider } from "./components/UserContext"
@@ -9,8 +8,6 @@ import Tab from './components/tab/page';
 import Lays from './components/layout/page';
 import { AppRoot } from "@telegram-apps/telegram-ui";
 import { NextTWAProvider } from 'next-twa';
-import Script from "next/script";
-
 
 
 
@@ -19,7 +16,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [normal, isNormal] = useState(null);
+  const [isNormal] = useState(null);
   const [setVersion] = useState(null);
   useEffect(() => {
     // Load the Telegram Web App JavaScript SDK

@@ -6,16 +6,17 @@ import { useUser } from '../UserContext'; // Adjust the path as necessary
 import { useState, useEffect } from "react";
 import { supabase } from "@/app/lib/supabaseClient";
 import { useNot } from '../StatusContext';
-import MyLoader from '../Loader/page';
-
 const Lays = () => {
-    const [notificationModal, seeNotificationModal] = useState(false)
+    //const [notificationModal, seeNotificationModal] = useState(false)
     const { userData } = useUser();
-    const [notificationMessage, setNotificationMessage] = useState([])
+    //const [notificationMessage, setNotificationMessage] = useState([])
 
     const { setNotification } = useNot();
 
     const [balance, setBalance] = useState(0.0)
+
+
+
 
     useEffect(() => {
         const fetchBalance = async () => {
@@ -88,9 +89,7 @@ const Lays = () => {
         <div className="flex ">
             <div className="flex w-full " style={{ 'paddingTop': '20px', 'paddingLeft': '20px' }}>
                 <div className='flex'>
-                    <Avatar
-                        size={48}
-                        src={userData.profile}
+                    <Avatar size={48} src={userData.profile}
                     />
 
                     <div className='flex flex-col justify-space-around mt-auto  ml-3'>

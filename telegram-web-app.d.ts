@@ -31,4 +31,7 @@ interface TelegramWebApp {
       WebApp: TelegramWebApp;
     };
   }
-  
+  type AvatarProps = {
+  size: number;
+  src?: string;
+};
