@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import '@telegram-apps/telegram-ui/dist/styles.css';
-import { AppRoot } from '@telegram-apps/telegram-ui';// Adjust as necessary
+import { AppRoot, Avatar } from '@telegram-apps/telegram-ui';// Adjust as necessary
 import Deposit from "./components/Deposit/page";
 import { supabase } from "./lib/supabaseClient";
 import { useActivePage } from './components/ActivePageContext';
@@ -69,11 +69,14 @@ const Telegram = () => {
                 <li key={index} className="block p-2 " style={{ borderTop: '1px solid var(--tgui--header_bg_color)', borderBottom: '1px solid var(--tgui--header_bg_color)' }}>
                   <div className="flex">
                     <div className="p-2 block w-2/12  ">
-                      <div style={{ borderRadius: '100%' }} className="relative bg-red-500 p-5 ml-2 w-fit">
-                        <div style={{ borderRadius: '100%' }} className="absolute bottom-0 right-0 bg-red-700 p-1.5 w-auto">
+                      <Avatar
+                        size={48}
+                        src={items.profile}
+                      />
+                      <div style={{ borderRadius: '100%' }} className="absolute bottom-0 right-0 bg-red-700 p-1.5 w-auto">
 
-                        </div>
                       </div>
+
                       <div className="m-1" style={{ fontSize: '0.8rem', lineHeight: '1' }}>
                         <strong>{items.name}</strong></div>
                       <div className="m-1" style={{ fontSize: '0.5rem', lineHeight: '1' }}>{items.id}</div>
@@ -98,7 +101,7 @@ const Telegram = () => {
                       </button>
                       <button style={{
                         fontSize: '0.8rem',
-                        background: showBox === items.id ? 'var(--tgui--accent_text_color)' : ''
+                        background: showDetail === items.id ? 'var(--tgui--accent_text_color)' : ''
                       }} className="p-1 h-fit flex flex-wrap flex-col place-content-center   w-fit rounded-lg  px-4" onClick={() => {
                         setShowDetail((prev) => (prev === items.id ? 0 : items.id))
                         setShowBox(0)
