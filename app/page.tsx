@@ -7,8 +7,9 @@ import { supabase } from "./lib/supabaseClient";
 import { useActivePage } from './components/ActivePageContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortDown } from "@fortawesome/free-solid-svg-icons/faSortDown";
-
-
+import { faComment } from "@fortawesome/free-regular-svg-icons";
+import { faTelegram } from "@fortawesome/free-brands-svg-icons";
+import { faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 const Telegram = () => {
   const { activePage } = useActivePage();
   const [showDetail, setShowDetail] = useState(0)
@@ -67,36 +68,42 @@ const Telegram = () => {
               {users.map((items, index) => (
                 <li key={index} className="block p-2 " style={{ borderTop: '1px solid var(--tgui--header_bg_color)', borderBottom: '1px solid var(--tgui--header_bg_color)' }}>
                   <div className="flex">
-                    <div className="p-2 block w-fit  ">
-                      <div style={{ borderRadius: '100%' }} className="relative bg-red-500 p-4 ml-2 w-fit">
-                        <div style={{ borderRadius: '100%' }} className="absolute bottom-0 right-0 bg-red-700 p-2 w-auto">
+                    <div className="p-2 block w-2/12  ">
+                      <div style={{ borderRadius: '100%' }} className="relative bg-red-500 p-5 ml-2 w-fit">
+                        <div style={{ borderRadius: '100%' }} className="absolute bottom-0 right-0 bg-red-700 p-1.5 w-auto">
 
                         </div>
                       </div>
                       <div className="m-1" style={{ fontSize: '0.8rem', lineHeight: '1' }}>
                         <strong>{items.name}</strong></div>
-                      <div className="m-1" style={{ fontSize: '0.8rem', lineHeight: '1' }}>{items.id}</div>
+                      <div className="m-1" style={{ fontSize: '0.5rem', lineHeight: '1' }}>{items.id}</div>
                     </div>
-                    <div className="grid ml-6 w-full gap-2 place-content-center grid-cols-4">
-                      <button className="p-1 h-fit w-fit px-4 rounded-lg ">
-                        <FontAwesomeIcon className=" mr-2 mb-1" icon={faSortDown} />
+                    <div className="flex gap-1 my-auto w-full  place-content-center ">
+                      <button style={{ fontSize: '0.8rem' }} className=" p-1 flex flex-wrap flex-col place-content-center h-fit w-fit px-4 rounded-lg ">
+                        <FontAwesomeIcon className=" mx-auto text-2xl mb-1" icon={faTelegram} />
                         chat</button>
-                      <button className="p-1  h-fit w-fit px-4 rounded-lg  "><FontAwesomeIcon className=" mr-2 mb-1" icon={faSortDown} />
+                      <button style={{ fontSize: '0.8rem' }} className="p-1 flex flex-wrap flex-col place-content-center  h-fit w-fit px-4 rounded-lg  ">
+                        <FontAwesomeIcon className="text-2xl  mx-auto mb-1" icon={faComment} />
+
                         message</button>
                       <button style={{
-                        opacity: showBox === items.id ? 'var(--tgui--accent_text_color)' : ''
-                      }} className="p-1 h-fit w-fit px-4 rounded-lg " onClick={() => {
+                        fontSize: '0.8REM',
+                        background: showBox === items.id ? 'var(--tgui--accent_text_color)' : ''
+                      }} className="p-1 h-fit flex flex-wrap flex-col place-content-center  w-fit px-4 rounded-lg " onClick={() => {
                         setShowBox((prev) => (prev === items.id ? 0 : items.id))
                         setShowDetail(0)
-                      }}> <FontAwesomeIcon className=" mr-2 mb-1" icon={faSortDown} />
+                      }}> <FontAwesomeIcon className="text-2xl  mx-auto mb-1" icon={faMoneyBill} />
                         update
 
                       </button>
-                      <button className="p-1 h-fit  w-fit rounded-lg  px-4" onClick={() => {
+                      <button style={{
+                        fontSize: '0.8rem',
+                        background: showBox === items.id ? 'var(--tgui--accent_text_color)' : ''
+                      }} className="p-1 h-fit flex flex-wrap flex-col place-content-center   w-fit rounded-lg  px-4" onClick={() => {
                         setShowDetail((prev) => (prev === items.id ? 0 : items.id))
                         setShowBox(0)
                       }} // Toggle logic
-                      > <FontAwesomeIcon className=" mr-2 mb-1" icon={faSortDown} />
+                      > <FontAwesomeIcon className="text-2xl  mx-auto mb-1" icon={faSortDown} />
 
                         Detail
 
