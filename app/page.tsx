@@ -222,7 +222,13 @@ const Telegram = () => {
                   </div>
                   <h2 style={{ color: 'var(--tgui--section_header_text_color)' }} className="text-xl font-bold mb-4">Message to {messageTo}</h2>
 
-                  <textarea rows="3" value={message} onChange={(e) => setMessage(e.target.value)} className="p-2 bg-gray-100 m-6 w-10/12"></textarea>
+                  <textarea
+                    rows={3}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="p-2 bg-gray-100 m-6 w-10/12"
+                  />
+
                   <button onClick={() => {
 
                     sendMessage()
