@@ -1,5 +1,6 @@
 // Avatar.tsx
 
+
 import React from 'react';
 
 interface AvatarProps {
