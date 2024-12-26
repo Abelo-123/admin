@@ -25,6 +25,7 @@ interface TelegramWebApp {
     // Add the expand method
     expand: () => void;
     close: () => void;
+    openUrl: (url: string) => void;
     onEvent?: (eventName: string, callback: () => void) => void;
   }
   

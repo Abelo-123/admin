@@ -119,7 +119,17 @@ const Telegram = () => {
                     <div className="m-1" style={{ fontSize: '0.5rem', lineHeight: '1' }}>{items.id}</div>
                   </div>
                   <div className="flex gap-1 my-auto w-full  place-content-center ">
-                    <button onClick={() => window.location.href = `https://t.me/${items.username}`} style={{ fontSize: '0.8rem' }} className=" p-1 flex flex-wrap flex-col place-content-center h-fit w-fit px-4  ">
+                    <button onClick={() => {
+                      if (window.Telegram && window.Telegram.WebApp) {
+                        const username = items.username; // Replace with the username of the Telegram account you wish to open
+                        const chatLink = `https://t.me/${username}`;
+
+                        // Open the chat within the Telegram mini app using openUrl
+                        window.Telegram.WebApp.openUrl(chatLink);
+                      } else {
+                        console.error("Telegram Web App is not available.");
+                      }
+                    }} style={{ fontSize: '0.8rem' }} className=" p-1 flex flex-wrap flex-col place-content-center h-fit w-fit px-4  ">
                       <FontAwesomeIcon className=" mx-auto text-2xl mb-1" icon={faTelegram} />
                       chat</button>
                     <button style={{ fontSize: '0.8rem' }} onClick={() => {
@@ -155,14 +165,14 @@ const Telegram = () => {
                   </div>
                 </div>
                 {showDetail == items.id && (
-                  <div style={{ background: 'var(--tgui--subtitle_text_color)', color: 'var(--tgui--button_text_color)' }} className="ml-auto w-full rounded-lg m-2 p-2 inline-block">
+                  <div style={{ background: 'var(--tgui--subtitle_text_color)', color: 'var(--tgui--button_text_color)' }} className="modal-pop ml-auto w-full rounded-lg m-2 p-2 inline-block">
                     <p>Balance: {items.balance}</p>
                     <p>Phone: {items.phone}</p>
                     <p>username: @{items.username}</p>
                   </div>
                 )}
                 {showBox == items.id && (
-                  <div className="flex">
+                  <div className="flex modal-pop">
                     <input type="text" className="bg-gray-100 w-11/12 m-2 p-1" />
                     <button className=" px-4 h-fit rounded-lg py-2 my-auto">update</button>
                   </div>

@@ -11,3 +11,17 @@ button {
   color: var(--tgui--text_color);
   border-left: 1px solid var(--tgui--button_color);
 }
+.modal-pop {
+  animation: popIn 0.3s ease-in forwards;
+}
+
+@keyframes popIn {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+  100% {
+    display: block;
+    opacity: 1;
+  }
+}
