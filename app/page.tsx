@@ -11,7 +11,7 @@ import { faComment } from "@fortawesome/free-regular-svg-icons";
 import { faTelegram } from "@fortawesome/free-brands-svg-icons";
 import { faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
-import WebApp from "@twa-dev/sdk";
+//import WebApp from "@twa-dev/sdk";
 const Telegram = () => {
   const { activePage } = useActivePage();
   const [showDetail, setShowDetail] = useState(0)
