@@ -38,10 +38,12 @@ const Telegram = () => {
   const heartbeatInterval = setInterval(() => {
     updateUserStatus(779060335, 'online');
   }, 2000);
-  window.addEventListener('unload', () => {
-    clearInterval(heartbeatInterval);
-    updateUserStatus(779060335, 'offline'); // Final status update
-  });
+  if (typeof window !== "undefined") {
+    window.addEventListener('unload', () => {
+      clearInterval(heartbeatInterval);
+      updateUserStatus(779060335, 'offline'); // Final status update
+    });
+  }
   useEffect(() => {
     // Load the Telegram Web App JavaScript SDK
 
