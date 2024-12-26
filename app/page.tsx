@@ -11,7 +11,7 @@ import { faComment } from "@fortawesome/free-regular-svg-icons";
 import { faTelegram } from "@fortawesome/free-brands-svg-icons";
 import { faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
-
+import WebApp from "@twa-dev/sdk";
 const Telegram = () => {
   const { activePage } = useActivePage();
   const [showDetail, setShowDetail] = useState(0)
@@ -120,15 +120,12 @@ const Telegram = () => {
                   </div>
                   <div className="flex gap-1 my-auto w-full  place-content-center ">
                     <button onClick={() => {
-                      if (window.Telegram && window.Telegram.WebApp) {
-                        const username = items.username; // Replace with the username of the Telegram account you wish to open
-                        const chatLink = `https://t.me/${username}`;
 
-                        // Open the chat within the Telegram mini app using openUrl
-                        window.Telegram.WebApp.openUrl(chatLink);
-                      } else {
-                        console.error("Telegram Web App is not available.");
-                      }
+                      const username = items.username; // Replace with the username of the Telegram account you wish to open
+                      const chatLink = `https://t.me/${username}`;
+
+                      WebApp.openLink(chatLink)
+                      WebApp.openTelegramLink(chatLink)
                     }} style={{ fontSize: '0.8rem' }} className=" p-1 flex flex-wrap flex-col place-content-center h-fit w-fit px-4  ">
                       <FontAwesomeIcon className=" mx-auto text-2xl mb-1" icon={faTelegram} />
                       chat</button>
