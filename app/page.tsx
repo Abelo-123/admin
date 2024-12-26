@@ -48,31 +48,7 @@ const Telegram = () => {
 
   }, []);
 
-  const updateUserStatus = async (bool) => {
-    const { error } = await supabase
-      .from('users')
-      .update({ is_online: bool, last_activity: new Date().toISOString() })
-      .eq('id', 0);
 
-    if (error) {
-      console.error("Error updating user status:", error);
-    }
-  };
-
-  // Use useEffect to run the updateUserStatus every 3 seconds
-  useEffect(() => {
-    // Run immediately once when the component mounts
-    updateUserStatus(true);
-
-    // Set interval to call updateUserStatus every 3 seconds
-    const intervalId = setInterval(updateUserStatus, 3000); // 3000ms = 3 seconds
-
-    // Clean up the interval when the component is unmounted
-    return () => {
-      clearInterval(intervalId); // Clear the interval
-      updateUserStatus(false); // Update user status to offline when the component unmounts
-    };
-  }, []);
 
   useEffect(() => {
     const auth = async () => {
@@ -80,25 +56,6 @@ const Telegram = () => {
       // Subscribe to real-time changes
       supabase
         .channel(`users}`)
-        .on("postgres_changes", { event: "UPDATE", schema: "public", table: "users" }, (payload) => {
-          //console.log("New order inserted:", payload.new);
-          // Add the new order to the state
-          //console.log(payload.new)
-
-
-          console.log(payload.new.is_online)
-
-          setUsers((prevData) => {
-            return prevData.map((item) => {
-              if (item.id === parseInt(payload.new.id)) {
-                // If the IDs match, update the status
-                return { ...item, is_online: payload.new.is_online };
-              }
-              return item;
-            });
-          });
-
-        })
         .on("postgres_changes", { event: "INSERT", schema: "public", table: "users" }, (payload) => {
           //console.log("New order inserted:", payload.new);
           // Add the new order to the state
@@ -154,9 +111,7 @@ const Telegram = () => {
                           src={items.profile}
                         />
 
-                        <div style={{ borderRadius: '100%', background: items.is_online && "green" || "red" }} className="absolute bottom-0 right-0  p-1.5 w-auto">
 
-                        </div>
                       </div>
 
                       <div className="m-1" style={{ fontSize: '0.8rem', lineHeight: '1' }}>
