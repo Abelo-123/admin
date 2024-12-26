@@ -59,12 +59,12 @@ const Telegram = () => {
         //const userId = Telegram.initDataUnsafe?.user?.id;
 
         Telegram.onEvent('mini_app_close', () => {
-          setUserOffline(7786592015);
+          setUserOffline(5928771903);
         });
 
         // Optionally mark the user as online when the app loads
         Telegram.ready();
-        setUserOnline(7786592015);
+        setUserOnline(5928771903);
         // Get the app version
 
       }
