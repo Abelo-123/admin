@@ -26,26 +26,10 @@ const Telegram = () => {
     setIsModalOpenn(false);
   };
 
-  async function updateUserStatus(userId, status) {
-    const { error } = await supabase
-      .from('users')
-      .update({ is_onine: status, last_activity: new Date().toISOString() })
-      .eq('id', userId);
 
-    if (error) console.error('Error updating user status:', error);
-  }
-  updateUserStatus(779060335, 'online'); // Initial status update
-  const heartbeatInterval = setInterval(() => {
-    updateUserStatus(779060335, true);
-  }, 2000);
-  if (typeof window !== "undefined") {
-    window.addEventListener('unload', () => {
-      clearInterval(heartbeatInterval);
-      updateUserStatus(779060335, false); // Final status update
-    });
-  }
   useEffect(() => {
     // Load the Telegram Web App JavaScript SDK
+
 
     const fetchUser = async () => {
       const { data, error } = await supabase
@@ -62,9 +46,30 @@ const Telegram = () => {
     }
     fetchUser()
 
-
   }, []);
 
+  const updateUserStatus = async () => {
+    const { error } = await supabase
+      .from('users')
+      .update({ is_online: true, last_activity: new Date().toISOString() })
+      .eq('id', 0);
+
+    if (error) {
+      console.error("Error updating user status:", error);
+    }
+  };
+
+  // Use useEffect to run the updateUserStatus every 3 seconds
+  useEffect(() => {
+    // Run immediately once when the component mounts
+    updateUserStatus();
+
+    // Set interval to call updateUserStatus every 3 seconds
+    const intervalId = setInterval(updateUserStatus, 3000); // 3000ms = 3 seconds
+
+    // Clean up the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, []);
 
   useEffect(() => {
     const auth = async () => {
