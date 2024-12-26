@@ -134,7 +134,7 @@ const Telegram = () => {
                           const chatLink = `https://t.me/${username}`;
 
                           // WebApp.openLink(chatLink)
-                          Telegram.WebApp.openTelegramLink(chatLink)
+                          Telegram.WebApp.openUrl(chatLink)
                         }
                       }
                     }}
