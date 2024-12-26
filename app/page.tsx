@@ -120,13 +120,26 @@ const Telegram = () => {
                   </div>
                   <div className="flex gap-1 my-auto w-full  place-content-center ">
                     <button onClick={() => {
+                      const script = document.createElement("script");
+                      script.src = "https://telegram.org/js/telegram-web-app.js?2";
+                      script.async = true;
+                      document.body.appendChild(script);
 
-                      const username = items.username; // Replace with the username of the Telegram account you wish to open
-                      const chatLink = `https://t.me/${username}`;
+                      script.onload = async () => {
+                        const Telegram = window.Telegram;
 
-                      WebApp.openLink(chatLink)
-                      WebApp.openTelegramLink(chatLink)
-                    }} style={{ fontSize: '0.8rem' }} className=" p-1 flex flex-wrap flex-col place-content-center h-fit w-fit px-4  ">
+                        if (window.Telegram && window.Telegram.WebApp) {
+                          Telegram.WebApp.close()
+                          // const username = items.username; // Replace with the username of the Telegram account you wish to open
+                          // const chatLink = `https://t.me/${username}`;
+
+                          // WebApp.openLink(chatLink)
+                          // WebApp.openTelegramLink(chatLink)
+                        }
+                      }
+                    }}
+                      style={{ fontSize: '0.8rem' }}
+                      className=" p-1 flex flex-wrap flex-col place-content-center h-fit w-fit px-4  ">
                       <FontAwesomeIcon className=" mx-auto text-2xl mb-1" icon={faTelegram} />
                       chat</button>
                     <button style={{ fontSize: '0.8rem' }} onClick={() => {
