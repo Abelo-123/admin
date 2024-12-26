@@ -61,6 +61,17 @@ const Telegram = () => {
         window.addEventListener('beforeunload', () => {
           setUserOffline(5928771903);
         });
+        document.getElementById('close-btn')?.addEventListener('click', () => {
+          setUserOffline(5928771903);
+          Telegram.close(); // Closes the Mini App
+        });
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'hidden') {
+            setUserOffline(5928771903);
+            console.log('App is hidden or closed');
+          }
+        });
+
 
         // Optionally mark the user as online when the app loads
         Telegram.ready();
