@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import '@telegram-apps/telegram-ui/dist/styles.css';
-import { AppRoot, Avatar } from '@telegram-apps/telegram-ui';// Adjust as necessary
+import { Avatar } from '@telegram-apps/telegram-ui';// Adjust as necessary
 import Deposit from "./components/Deposit/page";
 import { supabase } from "./lib/supabaseClient";
 import { useActivePage } from './components/ActivePageContext';
