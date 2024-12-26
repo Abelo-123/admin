@@ -29,19 +29,19 @@ const Telegram = () => {
   async function updateUserStatus(userId, status) {
     const { error } = await supabase
       .from('users')
-      .update({ status, last_active: new Date().toISOString() })
+      .update({ is_onine: status, last_activity: new Date().toISOString() })
       .eq('id', userId);
 
     if (error) console.error('Error updating user status:', error);
   }
   updateUserStatus(779060335, 'online'); // Initial status update
   const heartbeatInterval = setInterval(() => {
-    updateUserStatus(779060335, 'online');
+    updateUserStatus(779060335, true);
   }, 2000);
   if (typeof window !== "undefined") {
     window.addEventListener('unload', () => {
       clearInterval(heartbeatInterval);
-      updateUserStatus(779060335, 'offline'); // Final status update
+      updateUserStatus(779060335, false); // Final status update
     });
   }
   useEffect(() => {
