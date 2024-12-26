@@ -26,6 +26,7 @@ interface TelegramWebApp {
     expand: () => void;
     close: () => void;
     openUrl: (url: string) => void;
+    openTelegramLink:  (url: string) => void;
     onEvent?: (eventName: string, callback: () => void) => void;
   }
   

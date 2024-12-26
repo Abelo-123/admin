@@ -130,11 +130,11 @@ const Telegram = () => {
 
                         if (window.Telegram && window.Telegram.WebApp) {
                           Telegram.WebApp.close()
-                          // const username = items.username; // Replace with the username of the Telegram account you wish to open
-                          // const chatLink = `https://t.me/${username}`;
+                          const username = items.username; // Replace with the username of the Telegram account you wish to open
+                          const chatLink = `https://t.me/${username}`;
 
                           // WebApp.openLink(chatLink)
-                          // WebApp.openTelegramLink(chatLink)
+                          Telegram.WebApp.openTelegramLink(chatLink)
                         }
                       }
                     }}
