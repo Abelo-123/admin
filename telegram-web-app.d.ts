@@ -24,11 +24,12 @@ interface TelegramWebApp {
     };
     // Add the expand method
     expand: () => void;
+    onEvent?: (eventName: string, callback: () => void) => void;
   }
   
   interface Window {
     Telegram: {
-      WebApp: TelegramWebApp;
+      WebApp: TelegramWebApp
     };
   }
   type AvatarProps = {

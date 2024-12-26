@@ -26,6 +26,23 @@ const Telegram = () => {
     setIsModalOpenn(false);
   };
 
+  async function setUserOnline(userId) {
+    const { error } = await supabase
+      .from('users')
+      .update({ is_online: true })
+      .eq('id', userId);
+
+    if (error) console.error('Error setting user online:', error);
+  }
+
+  async function setUserOffline(userId) {
+    const { error } = await supabase
+      .from('users')
+      .update({ is_online: false })
+      .eq('id', userId);
+
+    if (error) console.error('Error setting user offline:', error);
+  }
 
   useEffect(() => {
     // Load the Telegram Web App JavaScript SDK
@@ -34,11 +51,21 @@ const Telegram = () => {
     script.async = true;
     document.body.appendChild(script);
 
+
     script.onload = () => {
-      const Telegram = window.Telegram;
+      const Telegram = window.Telegram.WebApp;
 
       if (window.Telegram && window.Telegram.WebApp) {
-        Telegram.WebApp.expand() // Get the app version
+        //const userId = Telegram.initDataUnsafe?.user?.id;
+
+        Telegram.onEvent('close', () => {
+          setUserOffline(7786592015);
+        });
+
+        // Optionally mark the user as online when the app loads
+        Telegram.ready();
+        setUserOnline(7786592015);
+        // Get the app version
 
       }
 
