@@ -55,7 +55,7 @@ const Telegram = () => {
 
       // Subscribe to real-time changes
       supabase
-        .channel(`users}`)
+        .channel(`users`)
         .on("postgres_changes", { event: "INSERT", schema: "public", table: "users" }, (payload) => {
           //console.log("New order inserted:", payload.new);
           // Add the new order to the state
@@ -93,121 +93,120 @@ const Telegram = () => {
   return (
     <>
 
-      <AppRoot>
-        <div className='w-screen' >
 
-          <div
-            id="1"
-            className={`w-screen ${activePage === 1 ? '' : 'hidden'}`}>
-            <ul>
-              {users.map((items, index) => (
-                <li key={index} className="block p-2 " style={{ borderTop: '1px solid var(--tgui--header_bg_color)', borderBottom: '1px solid var(--tgui--header_bg_color)' }}>
-                  <div className="flex">
-                    <div className="p-2 block w-2/12  ">
-                      <div className="relative w-fit">
-                        <Avatar
-                          size={48}
+      <div className='w-screen' >
 
-                          src={items.profile}
-                        />
+        <div
+          id="1"
+          className={`w-screen ${activePage === 1 ? '' : 'hidden'}`}>
+          <ul>
+            {users.map((items, index) => (
+              <li key={index} className="block p-2 " style={{ borderTop: '1px solid var(--tgui--header_bg_color)', borderBottom: '1px solid var(--tgui--header_bg_color)' }}>
+                <div className="flex">
+                  <div className="p-2 block w-2/12  ">
+                    <div className="relative w-fit">
+                      <Avatar
+                        size={48}
+
+                        src={items.profile}
+                      />
 
 
-                      </div>
-
-                      <div className="m-1" style={{ fontSize: '0.8rem', lineHeight: '1' }}>
-                        <strong>{items.name}</strong></div>
-                      <div className="m-1" style={{ fontSize: '0.5rem', lineHeight: '1' }}>{items.id}</div>
                     </div>
-                    <div className="flex gap-1 my-auto w-full  place-content-center ">
-                      <button onClick={() => window.location.href = `https://t.me/${items.username}`} style={{ fontSize: '0.8rem' }} className=" p-1 flex flex-wrap flex-col place-content-center h-fit w-fit px-4  ">
-                        <FontAwesomeIcon className=" mx-auto text-2xl mb-1" icon={faTelegram} />
-                        chat</button>
-                      <button style={{ fontSize: '0.8rem' }} onClick={() => {
-                        setIsModalOpenn(true)
-                        setMessageId(items.id)
-                        setMessageTo(items.name)
-                      }} className="p-1 flex flex-wrap flex-col place-content-center  h-fit w-fit px-4   ">
-                        <FontAwesomeIcon className="text-2xl  mx-auto mb-1" icon={faComment} />
 
-                        message</button>
-                      <button style={{
-                        fontSize: '0.8REM',
-                        background: showBox === items.id ? 'var(--tgui--accent_text_color)' : ''
-                      }} className="p-1 h-fit flex flex-wrap flex-col place-content-center  w-fit px-4  " onClick={() => {
-                        setShowBox((prev) => (prev === items.id ? 0 : items.id))
-                        setShowDetail(0)
-                      }}> <FontAwesomeIcon className="text-2xl  mx-auto mb-1" icon={faMoneyBill} />
-                        update
-
-                      </button>
-                      <button style={{
-                        fontSize: '0.8rem',
-                        background: showDetail === items.id ? 'var(--tgui--accent_text_color)' : ''
-                      }} className="p-1 h-fit flex flex-wrap flex-col place-content-center   w-fit  px-4" onClick={() => {
-                        setShowDetail((prev) => (prev === items.id ? 0 : items.id))
-                        setShowBox(0)
-                      }} // Toggle logic
-                      > <FontAwesomeIcon className="text-2xl  mx-auto mb-1" icon={faSortDown} />
-
-                        Detail
-
-                      </button>
-                    </div>
+                    <div className="m-1" style={{ fontSize: '0.8rem', lineHeight: '1' }}>
+                      <strong>{items.name}</strong></div>
+                    <div className="m-1" style={{ fontSize: '0.5rem', lineHeight: '1' }}>{items.id}</div>
                   </div>
-                  {showDetail == items.id && (
-                    <div style={{ background: 'var(--tgui--subtitle_text_color)', color: 'var(--tgui--button_text_color)' }} className="ml-auto w-full rounded-lg m-2 p-2 inline-block">
-                      <p>Balance: {items.balance}</p>
-                      <p>Phone: {items.phone}</p>
-                      <p>username: @{items.username}</p>
-                    </div>
-                  )}
-                  {showBox == items.id && (
-                    <div className="flex">
-                      <input type="text" className="bg-gray-100 w-11/12 m-2 p-1" />
-                      <button className=" px-4 h-fit rounded-lg py-2 my-auto">update</button>
-                    </div>
-                  )}
-                </li>
-              ))}
-            </ul>
-            {isModalOpenn && (
-              <div
-                style={{ background: 'var(--tgui--secondary_bg_color)' }}
-                className="fixed  modal-pops grid content-center inset-0  bg-opacity-75 grid content-center z-50"
-              >
-                <div style={{ height: 'auto', background: 'var(--tgui--bg_color)' }} className="mx-auto my-auto modal-pop relative  p-6 rounded-lg w-11/12">
-                  <div
-                    onClick={() => closeModall()}
+                  <div className="flex gap-1 my-auto w-full  place-content-center ">
+                    <button onClick={() => window.location.href = `https://t.me/${items.username}`} style={{ fontSize: '0.8rem' }} className=" p-1 flex flex-wrap flex-col place-content-center h-fit w-fit px-4  ">
+                      <FontAwesomeIcon className=" mx-auto text-2xl mb-1" icon={faTelegram} />
+                      chat</button>
+                    <button style={{ fontSize: '0.8rem' }} onClick={() => {
+                      setIsModalOpenn(true)
+                      setMessageId(items.id)
+                      setMessageTo(items.name)
+                    }} className="p-1 flex flex-wrap flex-col place-content-center  h-fit w-fit px-4   ">
+                      <FontAwesomeIcon className="text-2xl  mx-auto mb-1" icon={faComment} />
 
-                    className=" absolute right-8 text-gray-500 px-4 py-3 mx-auto rounded-md"
-                  >
-                    <FontAwesomeIcon icon={faClose} style={{ 'margin': 'auto auto' }} size="2x" />
+                      message</button>
+                    <button style={{
+                      fontSize: '0.8REM',
+                      background: showBox === items.id ? 'var(--tgui--accent_text_color)' : ''
+                    }} className="p-1 h-fit flex flex-wrap flex-col place-content-center  w-fit px-4  " onClick={() => {
+                      setShowBox((prev) => (prev === items.id ? 0 : items.id))
+                      setShowDetail(0)
+                    }}> <FontAwesomeIcon className="text-2xl  mx-auto mb-1" icon={faMoneyBill} />
+                      update
+
+                    </button>
+                    <button style={{
+                      fontSize: '0.8rem',
+                      background: showDetail === items.id ? 'var(--tgui--accent_text_color)' : ''
+                    }} className="p-1 h-fit flex flex-wrap flex-col place-content-center   w-fit  px-4" onClick={() => {
+                      setShowDetail((prev) => (prev === items.id ? 0 : items.id))
+                      setShowBox(0)
+                    }} // Toggle logic
+                    > <FontAwesomeIcon className="text-2xl  mx-auto mb-1" icon={faSortDown} />
+
+                      Detail
+
+                    </button>
                   </div>
-                  <h2 style={{ color: 'var(--tgui--section_header_text_color)' }} className="text-xl font-bold mb-4">Message to {messageTo}</h2>
-
-                  <textarea
-
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    className="p-2 bg-gray-100 m-6 w-10/12"
-                  />
-
-                  <button onClick={() => {
-
-                    sendMessage()
-                  }} style={{ background: 'var(--tgui--button_color', color: 'var(--tgui--button_text_color)' }} className="block px-4 h-fit rounded-lg py-2 my-auto">Send</button>
                 </div>
-              </div>
-            )}
-          </div>
-          <div
-            id="2"
-            className={`w-screen ${activePage === 2 ? '' : 'hidden  '} `}><Deposit />
-          </div>
+                {showDetail == items.id && (
+                  <div style={{ background: 'var(--tgui--subtitle_text_color)', color: 'var(--tgui--button_text_color)' }} className="ml-auto w-full rounded-lg m-2 p-2 inline-block">
+                    <p>Balance: {items.balance}</p>
+                    <p>Phone: {items.phone}</p>
+                    <p>username: @{items.username}</p>
+                  </div>
+                )}
+                {showBox == items.id && (
+                  <div className="flex">
+                    <input type="text" className="bg-gray-100 w-11/12 m-2 p-1" />
+                    <button className=" px-4 h-fit rounded-lg py-2 my-auto">update</button>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+          {isModalOpenn && (
+            <div
+              style={{ background: 'var(--tgui--secondary_bg_color)' }}
+              className="fixed  modal-pops grid content-center inset-0  bg-opacity-75 grid content-center z-50"
+            >
+              <div style={{ height: 'auto', background: 'var(--tgui--bg_color)' }} className="mx-auto my-auto modal-pop relative  p-6 rounded-lg w-11/12">
+                <div
+                  onClick={() => closeModall()}
 
+                  className=" absolute right-8 text-gray-500 px-4 py-3 mx-auto rounded-md"
+                >
+                  <FontAwesomeIcon icon={faClose} style={{ 'margin': 'auto auto' }} size="2x" />
+                </div>
+                <h2 style={{ color: 'var(--tgui--section_header_text_color)' }} className="text-xl font-bold mb-4">Message to {messageTo}</h2>
+
+                <textarea
+
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  className="p-2 bg-gray-100 m-6 w-10/12"
+                />
+
+                <button onClick={() => {
+
+                  sendMessage()
+                }} style={{ background: 'var(--tgui--button_color', color: 'var(--tgui--button_text_color)' }} className="block px-4 h-fit rounded-lg py-2 my-auto">Send</button>
+              </div>
+            </div>
+          )}
+        </div>
+        <div
+          id="2"
+          className={`w-screen ${activePage === 2 ? '' : 'hidden  '} `}><Deposit />
         </div>
 
-      </AppRoot >
+      </div>
+
     </>
   );
 };
