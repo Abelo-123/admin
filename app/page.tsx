@@ -48,10 +48,10 @@ const Telegram = () => {
 
   }, []);
 
-  const updateUserStatus = async () => {
+  const updateUserStatus = async (bool) => {
     const { error } = await supabase
       .from('users')
-      .update({ is_online: true, last_activity: new Date().toISOString() })
+      .update({ is_online: bool, last_activity: new Date().toISOString() })
       .eq('id', 0);
 
     if (error) {
@@ -62,13 +62,16 @@ const Telegram = () => {
   // Use useEffect to run the updateUserStatus every 3 seconds
   useEffect(() => {
     // Run immediately once when the component mounts
-    updateUserStatus();
+    updateUserStatus(true);
 
     // Set interval to call updateUserStatus every 3 seconds
     const intervalId = setInterval(updateUserStatus, 3000); // 3000ms = 3 seconds
 
     // Clean up the interval when the component is unmounted
-    return () => clearInterval(intervalId);
+    return () => {
+      clearInterval(intervalId); // Clear the interval
+      updateUserStatus(false); // Update user status to offline when the component unmounts
+    };
   }, []);
 
   useEffect(() => {
