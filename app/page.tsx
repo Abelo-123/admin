@@ -26,61 +26,24 @@ const Telegram = () => {
     setIsModalOpenn(false);
   };
 
-  async function setUserOnline(userId) {
+  async function updateUserStatus(userId, status) {
     const { error } = await supabase
       .from('users')
-      .update({ is_online: true })
+      .update({ status, last_active: new Date().toISOString() })
       .eq('id', userId);
 
-    if (error) console.error('Error setting user online:', error);
+    if (error) console.error('Error updating user status:', error);
   }
-
-  async function setUserOffline(userId) {
-    const { error } = await supabase
-      .from('users')
-      .update({ is_online: false })
-      .eq('id', userId);
-
-    if (error) console.error('Error setting user offline:', error);
-  }
-
+  updateUserStatus(779060335, 'online'); // Initial status update
+  const heartbeatInterval = setInterval(() => {
+    updateUserStatus(779060335, 'online');
+  }, 2000);
+  window.addEventListener('unload', () => {
+    clearInterval(heartbeatInterval);
+    updateUserStatus(779060335, 'offline'); // Final status update
+  });
   useEffect(() => {
     // Load the Telegram Web App JavaScript SDK
-    const script = document.createElement("script");
-    script.src = "https://telegram.org/js/telegram-web-app.js?2";
-    script.async = true;
-    document.body.appendChild(script);
-
-
-    script.onload = () => {
-      const Telegram = window.Telegram.WebApp;
-
-      if (window.Telegram && window.Telegram.WebApp) {
-        //const userId = Telegram.initDataUnsafe?.user?.id;
-
-        window.addEventListener('beforeunload', () => {
-          setUserOffline(5928771903);
-        });
-        document.getElementById('close-btn')?.addEventListener('click', () => {
-          setUserOffline(5928771903);
-          Telegram.close(); // Closes the Mini App
-        });
-        document.addEventListener('visibilitychange', () => {
-          if (document.visibilityState === 'hidden') {
-            setUserOffline(5928771903);
-            console.log('App is hidden or closed');
-          }
-        });
-
-
-        // Optionally mark the user as online when the app loads
-        Telegram.ready();
-        setUserOnline(5928771903);
-        // Get the app version
-
-      }
-
-    };
 
     const fetchUser = async () => {
       const { data, error } = await supabase
@@ -98,9 +61,6 @@ const Telegram = () => {
     fetchUser()
 
 
-    return () => {
-      document.body.removeChild(script);
-    };
   }, []);
 
 
