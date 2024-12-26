@@ -119,29 +119,33 @@ const Telegram = () => {
                     <div className="m-1" style={{ fontSize: '0.5rem', lineHeight: '1' }}>{items.id}</div>
                   </div>
                   <div className="flex gap-1 my-auto w-full  place-content-center ">
-                    <button onClick={() => {
-                      const script = document.createElement("script");
-                      script.src = "https://telegram.org/js/telegram-web-app.js?2";
-                      script.async = true;
-                      document.body.appendChild(script);
+                    {items.username && (
+                      <>
+                        <button onClick={() => {
+                          const script = document.createElement("script");
+                          script.src = "https://telegram.org/js/telegram-web-app.js?2";
+                          script.async = true;
+                          document.body.appendChild(script);
 
-                      script.onload = async () => {
-                        const Telegram = window.Telegram;
+                          script.onload = async () => {
+                            const Telegram = window.Telegram;
 
-                        if (window.Telegram && window.Telegram.WebApp) {
-                          Telegram.WebApp.close()
-                          const username = items.username; // Replace with the username of the Telegram account you wish to open
-                          const chatLink = `https://t.me/${username}`;
+                            if (window.Telegram && window.Telegram.WebApp) {
+                              Telegram.WebApp.close()
+                              const username = items.username; // Replace with the username of the Telegram account you wish to open
+                              const chatLink = `https://t.me/${username}`;
 
-                          // WebApp.openLink(chatLink)
-                          Telegram.WebApp.openTelegramLink(chatLink)
-                        }
-                      }
-                    }}
-                      style={{ fontSize: '0.8rem' }}
-                      className=" p-1 flex flex-wrap flex-col place-content-center h-fit w-fit px-4  ">
-                      <FontAwesomeIcon className=" mx-auto text-2xl mb-1" icon={faTelegram} />
-                      chat</button>
+                              // WebApp.openLink(chatLink)
+                              Telegram.WebApp.openTelegramLink(chatLink)
+                            }
+                          }
+                        }}
+                          style={{ fontSize: '0.8rem' }}
+                          className=" p-1 flex flex-wrap flex-col place-content-center h-fit w-fit px-4  ">
+                          <FontAwesomeIcon className=" mx-auto text-2xl mb-1" icon={faTelegram} />
+                          chat</button>
+                      </>
+                    )}
                     <button style={{ fontSize: '0.8rem' }} onClick={() => {
                       setIsModalOpenn(true)
                       setMessageId(items.id)
@@ -172,6 +176,7 @@ const Telegram = () => {
                       Detail
 
                     </button>
+
                   </div>
                 </div>
                 {showDetail == items.id && (
