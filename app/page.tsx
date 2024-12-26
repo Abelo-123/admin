@@ -58,7 +58,7 @@ const Telegram = () => {
       if (window.Telegram && window.Telegram.WebApp) {
         //const userId = Telegram.initDataUnsafe?.user?.id;
 
-        Telegram.onEvent('close', () => {
+        Telegram.onEvent('mini_app_close', () => {
           setUserOffline(7786592015);
         });
 
