@@ -12,7 +12,7 @@ const Orders = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchClicked, setsearchClicked] = useState(false)
 
-    const [data, setData] = useState<any[]>([]); // Adjust the type based on your data structure
+    const [data, setData] = useState([]); // Adjust the type based on your data structure
 
     useEffect(() => {
         const auth = async () => {
@@ -34,7 +34,7 @@ const Orders = () => {
     }, []);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const filteredData = data.filter((item: any) =>
+    const filteredData = data.filter((item) =>
         item.oid?.toString().toLowerCase().includes(searchQuery.toLowerCase())
     );
     return (
