@@ -4,7 +4,11 @@
 
 
 body {
-  color: var(--tgui--text_color);
+  color:white;
+  background: var(--tgui--section_bg_color);
+}
+
+Section {
   background: var(--tgui--section_bg_color);
 }
 button {
