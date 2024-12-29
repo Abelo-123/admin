@@ -32,7 +32,7 @@ const Orders = () => {
 
         auth(); // Call the auth function when the component is mounted
     }, []);
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const filteredData = data.filter((item: any) =>
         item.did?.toString().toLowerCase().includes(searchQuery.toLowerCase())
     );
