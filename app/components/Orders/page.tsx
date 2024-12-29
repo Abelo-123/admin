@@ -1,3 +1,4 @@
+"use client"
 import { Input, Section } from "@telegram-apps/telegram-ui";
 import MyLoader from "../Loader/page";
 import { useState, useEffect } from "react";
