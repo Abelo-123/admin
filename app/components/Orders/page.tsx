@@ -5,6 +5,7 @@ import { supabase } from "@/app/lib/supabaseClient";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faSearch } from "@fortawesome/free-solid-svg-icons";
 
+
 const Orders = () => {
     const [loader, setLoader] = useState(false)
     const [searchQuery, setSearchQuery] = useState("");
@@ -17,12 +18,11 @@ const Orders = () => {
             setLoader(true)
             // Fetch the initial data (orders) from Supabase or any other source
             const { data: initialData, error } = await supabase
-                .from("deposit")
+                .from("orders")
                 .select("*")
             if (error) {
                 console.log(error);
             } else {
-                console.log(initialData)
                 setData(initialData); // Set the initial data
                 setLoader(false)
 
@@ -33,9 +33,8 @@ const Orders = () => {
     }, []);
 
     const filteredData = data.filter((item) =>
-        item.did?.toString().toLowerCase().includes(searchQuery.toLowerCase())
+        item.oid?.toString().toLowerCase().includes(searchQuery.toLowerCase())
     );
-
     return (
         <>
             <div className="grid place-content-start pr-12 w-screen p-3 ">
@@ -61,27 +60,37 @@ const Orders = () => {
                                     <thead>
                                         <tr>
                                             <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                                                did
+                                                Status
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">amount</th>
+                                            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ID</th>
                                             <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                                                uid
+                                                Starting From
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">pm</th>
+                                            <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Remains</th>
 
                                             <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                                                status
+                                                Quantity
                                             </th>
+                                            <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Link</th>
+                                            <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                                                Charge (ETB)
+                                            </th>
+                                            <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Service</th>
+                                            <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Date</th>
                                         </tr>
                                     </thead>
                                     <tbody className=" ">
                                         {filteredData.map((items, index) => (
                                             <tr key={index}>
-                                                <td className="px-6 py-4 text-sm text-white">{items.did}</td>
-                                                <td className="px-6 py-4 text-sm text-white">{items.amount}</td>
-                                                <td className="px-6 py-4 text-sm text-white">{items.uid}</td>
-                                                <td className="px-6 py-4 text-sm text-white">{items.pm}</td>
                                                 <td className="px-6 py-4 text-sm text-white">{items.status}</td>
+                                                <td className="px-6 py-4 text-sm text-white">{items.oid}</td>
+                                                <td className="px-6 py-4 text-sm text-white">{items.start_count}</td>
+                                                <td className="px-6 py-4 text-sm text-white">{items.remains}</td>
+                                                <td className="px-6 py-4 text-sm text-white">{items.quantity}</td>
+                                                <td className="px-6 py-4 text-sm text-white">{items.link}</td>
+                                                <td className="px-6 py-4 text-sm text-white">{items.charge}</td>
+                                                <td className="px-6 py-4 text-sm text-white">{items.service}</td>
+                                                <td className="px-6 py-4 text-sm text-white">{items.date}</td>
                                             </tr>
                                         ))}
                                     </tbody>
