@@ -33,7 +33,8 @@ const Orders = () => {
         auth(); // Call the auth function when the component is mounted
     }, []);
 
-    const filteredData = data.filter((item) =>
+    // @ts-ignore
+    const filteredData = data.filter((item: any) =>
         item.did?.toString().toLowerCase().includes(searchQuery.toLowerCase())
     );
 
