@@ -14,7 +14,7 @@ const Tab = () => {
 
         <>
 
-            <Tabbar style={{ background: ' var(--tgui--bg_color)', border: '2px solid transparent', display: 'grid', margin: '0rem', placeItems: 'center', gridTemplateColumns: 'repeat(4, 1fr)' }}>
+            <Tabbar style={{ background: 'red', border: '2px solid red', display: 'grid', margin: '0rem', placeItems: 'center', gridTemplateColumns: 'repeat(4, 1fr)' }}>
                 <Tabbar.Item onClick={() => updateActivePage(1)}>
                     <div className='flex flex-col'>
 

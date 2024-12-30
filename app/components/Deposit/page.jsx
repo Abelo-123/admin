@@ -52,13 +52,13 @@ const Orders = () => {
                 />
             </div>
             )}
-            <Section header="Order History" style={{ marginTop: '-0.5rem', background: 'var(--tgui--section_bg_color)', border: "1px solid var(--tgui--section_bg_color)" }}>
-                <div style={{ width: "100%" }} className=" mx-auto">
+            <Section header="Order History" style={{ marginTop: '-0.5rem', background: 'red', border: '2px solid red' }}>
+                <div style={{ width: "100%"}} className=" mx-auto">
                     {loader && <MyLoader />}
                     <div style={{ borderRadius: "10px" }} className="scrollabler w-full overflow-x-auto">
                         <ul>
                             {!loader &&
-                                <table style={{ width: "100%" }} className="   rounded-lg shadow-md">
+                                <table style={{ width: "100%" }} className="  rounded-lg shadow-md">
                                     <thead>
                                         <tr>
                                             <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
