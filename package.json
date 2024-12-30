@@ -22,7 +22,8 @@
     "react": "^19.0.0",
     "react-content-loader": "^7.0.2",
     "react-dom": "^19.0.0",
-    "sweetalert2": "^11.15.3"
+    "sweetalert2": "^11.15.3",
+    "tgui-core": "^1.5.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

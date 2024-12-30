@@ -81,18 +81,18 @@ const Orders = () => {
                                             <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Date</th>
                                         </tr>
                                     </thead>
-                                    <tbody className=" ">
+                                    <tbody>
                                         {filteredData.map((items, index) => (
                                             <tr key={index}>
-                                                <td className="px-6 py-4 text-sm text-white">{items.status}</td>
-                                                <td className="px-6 py-4 text-sm text-white">{items.oid}</td>
-                                                <td className="px-6 py-4 text-sm text-white">{items.start_count}</td>
-                                                <td className="px-6 py-4 text-sm text-white">{items.remains}</td>
-                                                <td className="px-6 py-4 text-sm text-white">{items.quantity}</td>
-                                                <td className="px-6 py-4 text-sm text-white">{items.link}</td>
-                                                <td className="px-6 py-4 text-sm text-white">{items.charge}</td>
-                                                <td className="px-6 py-4 text-sm text-white">{items.service}</td>
-                                                <td className="px-6 py-4 text-sm text-white">{items.date}</td>
+                                                <td className="px-6 py-4 text-sm ">{items.status}</td>
+                                                <td className="px-6 py-4 text-sm ">{items.oid}</td>
+                                                <td className="px-6 py-4 text-sm ">{items.start_count}</td>
+                                                <td className="px-6 py-4 text-sm ">{items.remains}</td>
+                                                <td className="px-6 py-4 text-sm ">{items.quantity}</td>
+                                                <td className="px-6 py-4 text-sm">{items.link}</td>
+                                                <td className="px-6 py-4 text-sm ">{items.charge}</td>
+                                                <td className="px-6 py-4 text-sm ">{items.service}</td>
+                                                <td className="px-6 py-4 text-sm ">{items.date}</td>
                                             </tr>
                                         ))}
                                     </tbody>
